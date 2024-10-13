@@ -9,12 +9,18 @@ export default function CreateEvent() {
 	const { mutate } = trpc.event.create.useMutation({
 		onSuccess: data => router.push(`/events/${data.id}`)
 	})
+	const cancelHandler = () => {
+		router.push(`/`)
+	}
 	const createEventForm = (data: CreateEventValues) => {
 		mutate(data)
 	}
 	return (
 		<div className='max-w-[1000px] mx-auto'>
-			<CreateEventForm onSubmit={createEventForm} />
+			<CreateEventForm
+				onSubmit={createEventForm}
+				cancelHandler={cancelHandler}
+			/>
 		</div>
 	)
 }
